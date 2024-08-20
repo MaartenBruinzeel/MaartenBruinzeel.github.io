@@ -6,10 +6,40 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "DM Serif Text", sans-serif; !important;
+    font-family: "DM Serif Text", sans-serif !important;
     color: white !important;
 }
 
+/* Default font sizes for larger screens */
+h1 {
+    font-size: 12rem;
+}
+
+h4 {
+    font-size: 5rem;
+}
+
+/* Responsive font sizes for medium screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 8rem;
+    }
+
+    h4 {
+        font-size: 3rem;
+    }
+}
+
+/* Responsive font sizes for small screens */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 6rem;
+    }
+
+    h4 {
+        font-size: 2rem;
+    }
+}
 
 button {
     padding: 10px 20px;
@@ -34,11 +64,13 @@ button:hover {
     opacity: 1;
     border: transparent !important;
 }
+
 .footer .btn {
     margin-left: 10px;
     color: white;
     border-color: transparent;
 }
+
 .footer .btn-outline-secondary:hover {
     background-color: white;
     color: #333;
