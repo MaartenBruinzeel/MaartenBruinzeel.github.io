@@ -148,6 +148,7 @@ h2:empty,
 .hero {
   position: relative;
   height: 100vh;
+  height: 100svh;   /* excludes the phone browser's address bar */
   min-height: 420px;
   background: #000;
 }
@@ -158,7 +159,8 @@ h2:empty,
   background: #000;
 }
 
-/* Show the whole 4:3 video; the leftover space at the sides stays black. */
+/* Always show the whole 4:3 frame: black bars at the sides on wide screens,
+   above and below on narrow or upright ones. */
 .hero-media video {
   object-fit: contain;
 }
@@ -286,10 +288,6 @@ h2:empty,
 
   .header-links {
     gap: 20px;
-  }
-
-  .hero {
-    height: 70vh;
   }
 
   .intro,
