@@ -1,0 +1,312 @@
+/* Fonts: files live in assets/fonts. Until they are there, the fallbacks in
+   --font-heading and --font-body are used instead. */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Courier Prime";
+  src: url("../assets/fonts/CourierPrime-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Courier Prime";
+  src: url("../assets/fonts/CourierPrime-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Colours, fonts and spacing: change these to restyle the whole site. */
+:root {
+  --dark: #3d3d3d;
+  --light: #ffffff;
+  --text: #3d3d3d;
+  --accent: #ffffff;        /* text and icons on top of the hero */
+  --placeholder: #d9d9d9;   /* fill for empty image slots */
+  --font-heading: "Space Grotesk", "Trebuchet MS", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: "Courier Prime", "Courier New", Courier, monospace;
+  --gutter: 4vw;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--light) url("../assets/patterns/10.png");
+  line-height: 1.6;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+/* Image slots: grey until an <img> or <video> is placed inside, which then fills the slot. */
+.slot {
+  display: block;
+  background: var(--placeholder);
+  overflow: hidden;
+}
+
+.slot img,
+.slot video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Empty text shows as a faint bar so the layout stays visible; it disappears once text is added. */
+p:empty,
+h2:empty,
+.button:empty {
+  min-height: 1.6em;
+  background: rgba(128, 128, 128, 0.18);
+}
+
+/* Header */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 13px var(--gutter);
+}
+
+.logo {
+  grid-column: 2;
+  width: 104px;
+  height: 104px;
+}
+
+.header-links {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  gap: 36px;
+}
+
+.icon-link {
+  width: 28px;
+  height: 28px;
+}
+
+.logo.slot,
+.icon-link.slot {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.logo.slot:has(img),
+.icon-link.slot:has(img) {
+  background: none;
+}
+
+.logo img,
+.icon-link img {
+  object-fit: contain;
+}
+
+/* Keep the tiny envelope icon crisp when scaled up. */
+.icon-link img[src$="envelope.gif"] {
+  image-rendering: pixelated;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 420px;
+  background: #000;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  background: #000;
+}
+
+/* Show the whole 4:3 video; the leftover space at the sides stays black. */
+.hero-media video {
+  object-fit: contain;
+}
+
+.hero-tagline {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  width: min(90%, 28ch);
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+/* Intro */
+.intro {
+  width: min(100% - 2 * var(--gutter), 700px);
+  margin: 0 auto;
+  padding: 11vw 0 6vw;
+  font-size: 1.2rem;
+}
+
+.intro p {
+  margin: 0 0 1.2em;
+}
+
+.button {
+  display: inline-block;
+  min-width: 97px;
+  margin-left: 3em;
+  padding: 0.5em 1.6em;
+  border: 1px solid currentColor;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  background: var(--dark);
+  color: var(--light);
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7.6vw;
+  padding: 4vw var(--gutter);
+}
+
+.gallery .slot {
+  aspect-ratio: 3 / 4;
+}
+
+/* Banner */
+.banner {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 507px;
+  margin-top: 6vw;
+  padding: 0 var(--gutter);
+}
+
+.banner-media {
+  position: absolute;
+  inset: 0;
+}
+
+.banner h2 {
+  position: relative;
+  min-width: 12ch;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Closing */
+.closing {
+  padding: 10vw var(--gutter);
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.closing p {
+  width: min(100%, 500px);
+  margin: 0 auto;
+}
+
+/* Footer */
+.site-footer {
+  padding: 3rem var(--gutter);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.site-footer p {
+  width: min(100%, 300px);
+  margin: 0 auto;
+}
+
+/* Paper dolls repeated edge to edge. The tile is PaperDolls.gif with its empty
+   side columns trimmed so neighbouring hands touch; shown at twice its 69x14 size. */
+.footer-insert {
+  height: 28px;
+  margin: 0 calc(-1 * var(--gutter));
+  background: url("../assets/icons/PaperDollsTile.png") center / 138px 28px repeat-x;
+  image-rendering: pixelated;
+}
+
+/* Smaller screens */
+@media (max-width: 800px) {
+  .logo {
+    width: 72px;
+    height: 72px;
+  }
+
+  .header-links {
+    gap: 20px;
+  }
+
+  .hero {
+    height: 70vh;
+  }
+
+  .intro,
+  .closing {
+    font-size: 1.05rem;
+  }
+
+  .button {
+    margin-left: 0;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5vw;
+  }
+
+  .banner {
+    min-height: 320px;
+  }
+}
