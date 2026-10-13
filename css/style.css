@@ -210,15 +210,30 @@ h2:empty,
 }
 
 /* Gallery */
+/* Rows of one landscape and one portrait picture. A landscape slot is exactly
+   twice as wide as a portrait one, and both are the same height. */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 7.6vw;
+  --gallery-gap: 7.6vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gallery-gap);
   padding: 4vw var(--gutter);
 }
 
 .gallery .slot {
-  aspect-ratio: 3 / 4;
+  position: relative;
+  flex: 0 0 calc((100% - var(--gallery-gap)) / 3);
+  aspect-ratio: 5 / 7;
+}
+
+.gallery .slot.landscape {
+  flex-basis: calc((100% - var(--gallery-gap)) * 2 / 3);
+  aspect-ratio: 10 / 7;
+}
+
+.gallery .slot img {
+  position: absolute;
+  inset: 0;
 }
 
 /* Banner */
@@ -275,8 +290,23 @@ h2:empty,
 .footer-insert {
   height: 28px;
   margin: 0 calc(-1 * var(--gutter));
-  background: url("../assets/icons/PaperDollsTile.png") center / 138px 28px repeat-x;
+  background: url("../assets/icons/PaperDollsTile.png") 0 0 / 138px 28px repeat-x;
   image-rendering: pixelated;
+  animation: footer-carousel 6s steps(69) infinite;
+}
+
+/* Slides the strip left by exactly one tile, so the loop is seamless. The 69
+   steps move it one source pixel at a time, which keeps the pixel art crisp. */
+@keyframes footer-carousel {
+  to {
+    background-position: -138px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-insert {
+    animation: none;
+  }
 }
 
 /* Smaller screens */
@@ -300,8 +330,7 @@ h2:empty,
   }
 
   .gallery {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5vw;
+    --gallery-gap: 5vw;
   }
 
   .banner {
