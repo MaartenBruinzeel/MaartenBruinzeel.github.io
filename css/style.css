@@ -85,6 +85,11 @@ a {
   object-fit: cover;
 }
 
+/* Drop the grey once a picture is in, so transparent PNGs show the page behind them. */
+.slot:has(img) {
+  background: none;
+}
+
 /* Empty text shows as a faint bar so the layout stays visible; it disappears once text is added. */
 p:empty,
 h2:empty,
@@ -236,6 +241,27 @@ h2:empty,
   inset: 0;
 }
 
+/* Section titles above the gallery and the speakers */
+.section-title {
+  margin: 4vw var(--gutter) 0;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Speakers: 4 portrait pictures in a row */
+.speakers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4vw;
+  padding: 4vw var(--gutter);
+}
+
+.speakers .slot {
+  aspect-ratio: 3 / 4;
+}
+
 /* Banner */
 .banner {
   position: relative;
@@ -331,6 +357,11 @@ h2:empty,
 
   .gallery {
     --gallery-gap: 5vw;
+  }
+
+  .speakers {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5vw;
   }
 
   .banner {
